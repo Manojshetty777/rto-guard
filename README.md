@@ -46,3 +46,12 @@ Cheap rules run first; the LLM only sees addresses the rules can't settle, and a
 - Customer-behaviour assumptions (reply and prepaid take-up, repeat value) are **not in the data**; they live in `rules.yaml` and are stress-tested in `scripts/sensitivity.py`. Measure them first.
 - All reported numbers use the rule-based fallback judge; the Claude-API path is implemented but untested on this dataset.
 - Mock WhatsApp/payment only; dashboard "yesterday" = the last day in the CSV (30 Sep), scored by a model trained on Apr-Aug only.
+
+
+
+
+
+
+
+<img width="1327" height="884" alt="image" src="https://github.com/user-attachments/assets/34ea723f-be2c-4cb2-b964-7ad71fefbc2d" />
+
