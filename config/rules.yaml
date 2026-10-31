@@ -1,0 +1,48 @@
+# =====================================================================
+#  RTO GUARD - settings anyone on the ops or marketing team can edit.
+#  Change a number, save, re-run. No code changes needed.
+#  "Risk" = the chance (0 to 1) that a COD order comes back. 0.30 = 30%.
+# =====================================================================
+
+thresholds:
+  ship_below: 0.20          # risk under this: ship as normal
+  confirm_from: 0.40        # risk from here: customer must confirm on WhatsApp first
+  hold_from: 0.68           # risk from here: hold / cancel
+  # Between ship_below and confirm_from we offer a prepaid discount instead.
+
+protect_growth:             # Marketing's guardrails
+  first_orders_never_cancelled: true   # a first order is sent to WhatsApp confirmation instead of being cancelled
+  first_order_hold_from: 0.80          # ...unless risk is extreme AND there is no reachable phone
+  max_hold_share: 0.08                 # alarm on dashboard if more than 8% of a day's orders are held
+
+protect_ops:                # Operations' guardrails
+  refused_twice_before: hold           # hold | confirm - customers who refused 2+ earlier orders
+  unusable_address_and_fake_name: hold # both together = nobody to deliver to
+
+unreachable_phone: hold     # invalid phone: WhatsApp confirmation impossible -> hold (or: ship)
+
+prepaid_discount:
+  share_of_break_even: 0.5  # we give away at most half of what a prepaid order saves us
+  min_rupees: 30
+  max_percent_of_order: 0.10
+  round_to: 10
+
+# ---- Money assumptions (from the brief). Update when real costs change ----
+costs:
+  forward_shipping: 65
+  return_shipping: 65
+  packaging_handling: 25
+  damaged_return_share: 0.08
+  product_cost: 180
+  gross_margin: 0.62              # share of order value kept on a delivered order, before shipping + packing
+  prepaid_rto_rate: 0.04
+  whatsapp_cost_per_order: 1.0    # Rs per conversation
+
+# ---- Behaviour assumptions: NOT in the data. First thing to measure once live ----
+assumptions:
+  repeat_value_first_order: 100   # expected future margin per delivered first-time customer (Rs)
+  confirm_reply_genuine: 0.80     # share of genuine customers who answer YES within 24h
+  confirm_reply_risky: 0.30       # share of would-be-refusers who answer YES
+  confirm_risky_then_accept: 0.50 # of those, share who then really take delivery
+  nudge_accept_genuine: 0.30      # share of genuine customers who take the prepaid offer (they would have paid COD anyway = discount leakage)
+  nudge_accept_risky: 0.15        # share of would-be-refusers who take it (lower: they are the hesitant ones)

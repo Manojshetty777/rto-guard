@@ -1,0 +1,28 @@
+{
+ "ops_cancel_risky": {
+  "cancelled": 53,
+  "saved": 4913,
+  "lost": 15757,
+  "net": -10845
+ },
+ "ops_cancel_30": {
+  "cancelled": 98,
+  "saved": 7792,
+  "lost": 32427,
+  "net": -24634
+ },
+ "ours": {
+  "saved_rto": 5548,
+  "recovered": 6146,
+  "lost_genuine": 3530,
+  "costs": 2467,
+  "net": 5697
+ },
+ "counts": {
+  "SHIP": 90,
+  "NUDGE_PREPAID": 186,
+  "CONFIRM": 46,
+  "HOLD": 7
+ },
+ "rto_cost_baseline": 14568
+}
